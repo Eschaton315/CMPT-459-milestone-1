@@ -1,9 +1,9 @@
 import pandas as pd
 
-"""1.1"""
+"""task-1.1"""
 
 
-def part_1():
+def task_1():
     cases_train = pd.read_csv('../data/cases_2021_train.csv')
 
     if 'outcome' in cases_train:
@@ -31,13 +31,13 @@ def part_1():
 
         cases_train.to_csv('../data/cases_2021_train.csv')
 
-        print("part 1.1 complete")
+        print("task-1.1 complete")
     else:
         print("'outcome' column already removed")
 
 
 def main():
-    part_1()
+    task_1()
 
 
 if __name__ == "__main__":
