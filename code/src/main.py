@@ -1,18 +1,17 @@
 import pandas as pd
 import numpy as np
-
+#for testing 1.7
+"""
 cases_train = pd.read_csv('../data/cases_2021_train.csv')
 cases_test = pd.read_csv('../data/cases_2021_test.csv')
 location = pd.read_csv('../data/location_2021.csv')
-
-"""1.1"""
 
 # 1.1
 
 if 'outcome' in cases_train:
     cases_train.groupby('outcome').size()
 
-    """Creating outcome_group values"""
+    # Creating outcome_group values
     cases_train.loc[cases_train['outcome'].isin(['Recovered', 'recovered']), 'outcome_group'] = 'recovered'
 
     cases_train.loc[cases_train['outcome'].isin(
@@ -29,7 +28,7 @@ if 'outcome' in cases_train:
 
     cases_train.groupby('outcome_group').size()
 
-    """Removing outcome column"""
+    # Removing outcome column
     cases_train = cases_train.drop(['outcome'], axis=1)
 
     cases_train.to_csv('../data/cases_2021_train.csv')
@@ -138,8 +137,6 @@ for x in location.index:
 
 # print(location.info())
 
-# for testing purpose get rid of some data for now
-cases_train.dropna(subset=['additional_information'], inplace=True)
 
 count = 0
 print("Joining cases_train with Location...")
@@ -157,8 +154,6 @@ for y in cases_train.index:
             count += 1
             break
 print("Done")
-# for testing purpose get rid of some data for now
-cases_test.dropna(subset=['additional_information'], inplace=True)
 
 count = 0
 print("Joining cases_test with Location...")
@@ -177,10 +172,22 @@ for y in cases_test.index:
             break
 print("Done")
 
+
 cases_train.to_csv('../results/cases_2021_test_processed.csv', encoding='utf-8', index=False)
 cases_test.to_csv('../results/cases_2021_train_processed.csv', encoding='utf-8', index=False)
 location.to_csv('../results/location_2021_processed.csv', encoding='utf-8', index=False)
+"""
+# remove above post 1.7
 
 # 1.7
 
+# getting files again
+cases_train = pd.read_csv('../results/cases_2021_train_processed.csv')
+cases_test = pd.read_csv('../results/cases_2021_test_processed.csv')
 
+# removing unnamed rows
+cases_train = cases_train.loc[:, ~cases_train.columns.str.contains('^Unnamed')]
+cases_test = cases_test.loc[:, ~cases_test.columns.str.contains('^Unnamed')]
+
+print(cases_test)
+print(cases_train)
