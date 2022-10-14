@@ -5,6 +5,8 @@ cases_train = pd.read_csv('../data/cases_2021_train.csv')
 cases_test = pd.read_csv('../data/cases_2021_test.csv')
 location = pd.read_csv('../data/location_2021.csv')
 
+"""1.1"""
+
 if 'outcome' in cases_train:
     cases_train.groupby('outcome').size()
 
