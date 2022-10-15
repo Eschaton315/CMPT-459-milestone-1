@@ -174,3 +174,4 @@ for y in cases_test.index:
 
 cases_train.to_csv('cases_2021_test_processed.csv', encoding='utf-8', index=False)
 cases_test.to_csv('cases_2021_train_processed.csv', encoding='utf-8', index=False)
+location.to_csv('location_2021_processed.csv', encoding='utf-8', index=False)
