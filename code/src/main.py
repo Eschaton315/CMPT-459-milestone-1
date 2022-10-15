@@ -92,10 +92,30 @@ for x in cases_test.index:
         ratio_count += 1
 
 # 1.5
-# get rid of outliers values for fatality rate > 100%
 for x in location.index:
+    confirmed = location.loc[x, 'Confirmed']
+    deaths = location.loc[x, 'Deaths']
+    recovered = location.loc[x, 'Recovered']
+    active = location.loc[x, 'Active']
+# get rid of outliers data for fatality rate > 100%
     if location.loc[x, 'Case_Fatality_Ratio'] > 100:
         location.drop(x, inplace=True)
+# get rid of invalid data where numbers don't add up
+    elif (deaths + recovered + active) != confirmed:
+        location.drop(x, inplace=True)
+
+# drop data where ages are not in valid range
+for x in cases_test.index:
+    if cases_test.loc[x, 'age'] < 0:
+        cases_test.drop(x, inplace=True)
+    elif cases_test.loc[x, 'age'] > 120:
+        cases_test.drop(x, inplace=True)
+
+for x in cases_train.index:
+    if cases_train.loc[x, 'age'] < 0:
+        cases_train.drop(x, inplace=True)
+    elif cases_train.loc[x, 'age'] > 120:
+        cases_train.drop(x, inplace=True)
 
 # 1.6
 # adding attributes to train data later for combining with location data
