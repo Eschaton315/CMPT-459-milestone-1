@@ -121,9 +121,9 @@ cases_test["Case_Fatality_Ratio"] = ''
 #clean up country name in location data file
 for y in location.index:
     if location.loc[y,'Country_Region'] == 'Korea, South':
-        location.loc[y,'Country'] = 'South Korea'
+        location.loc[y,'Country_Region'] = 'South Korea'
     elif location.loc[y,'Country_Region'] == 'US':
-        location.loc[y,'Country'] = 'United States'
+        location.loc[y,'Country_Region'] = 'United States'
 
 #print(location.info())
 
