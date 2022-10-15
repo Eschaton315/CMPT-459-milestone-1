@@ -115,17 +115,12 @@ cases_test["Active"] = ''
 cases_test["Incident_Rate"] = ''
 cases_test["Case_Fatality_Ratio"] = ''
 
-#print(cases_train)
-#print(cases_train.info())
-
 #clean up country name in location data file
 for y in location.index:
     if location.loc[y,'Country_Region'] == 'Korea, South':
         location.loc[y,'Country_Region'] = 'South Korea'
     elif location.loc[y,'Country_Region'] == 'US':
         location.loc[y,'Country_Region'] = 'United States'
-
-#print(location.info())
 
 #get rid of duplicate data for joining data later
 country = "place holder 1"
@@ -134,8 +129,6 @@ for x in location.index:
         location.drop(x, inplace = True)
     else:
         country = location.loc[x,'Country_Region']
-
-#print(location.info())
 
 #for testing purpose get rid of some data for now
 cases_train.dropna(subset = ['additional_information'], inplace = True)
