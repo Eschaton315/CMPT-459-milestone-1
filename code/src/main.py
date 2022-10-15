@@ -181,6 +181,8 @@ location.to_csv('../results/location_2021_processed.csv', encoding='utf-8', inde
 
 # 1.7
 
+print("Creating Features csv...")
+
 # getting files again
 cases_train = pd.read_csv('../results/cases_2021_train_processed.csv')
 cases_test = pd.read_csv('../results/cases_2021_test_processed.csv')
@@ -198,6 +200,7 @@ cases_test = cases_test.drop(['source', 'latitude', 'longitude', 'Deaths'], axis
 # create files for feature csv
 cases_train.to_csv('../results/cases_2021_test_processed_features.csv', encoding='utf-8', index=False)
 cases_test.to_csv('../results/cases_2021_train_processed_features.csv', encoding='utf-8', index=False)
+print("Done")
 
 # print(cases_train.isna().sum())
 # print(cases_test.isna().sum())
