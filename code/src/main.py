@@ -34,7 +34,6 @@ if 'outcome' in cases_train:
 else:
     print("'outcome' column already removed")
 
-
 #1.4
 #cleaning train data set
 #drop rows with missing age values
@@ -90,13 +89,11 @@ for x in cases_test.index:
             cases_test.loc[x,'sex'] = 'male'
         ratio_count += 1
 
-
 #1.5
 #get rid of outliers values for fatality rate > 100%
 for x in location.index:
     if location.loc[x, 'Case_Fatality_Ratio'] > 100:
         location.drop(x, inplace=True)
-
 
 #1.6
 #adding attributes to train data later for combinging with location data
@@ -130,10 +127,6 @@ for x in location.index:
     else:
         country = location.loc[x,'Country_Region']
 
-#for testing purpose get rid of some data for now
-cases_train.dropna(subset = ['additional_information'], inplace = True)
-
-count = 0
 for y in cases_train.index:
     for x in location.index:
         if location.loc[x, 'Country_Region'] == cases_train.loc[y, 'country']:
@@ -144,13 +137,8 @@ for y in cases_train.index:
             cases_train.loc[y, 'Active'] = location.loc[x, 'Active']
             cases_train.loc[y, 'Incident_Rate'] = location.loc[x, 'Incident_Rate']
             cases_train.loc[y, 'Case_Fatality_Ratio'] = location.loc[x, 'Case_Fatality_Ratio']
-            #to check it's actually running
-            count += 1
             break
-#for testing purpose get rid of some data for now
-cases_test.dropna(subset = ['additional_information'], inplace = True)
 
-count = 0
 for y in cases_test.index:
     for x in location.index:
         if location.loc[x, 'Country_Region'] == cases_test.loc[y, 'country']:
@@ -161,8 +149,6 @@ for y in cases_test.index:
             cases_test.loc[y, 'Active'] = location.loc[x, 'Active']
             cases_test.loc[y, 'Incident_Rate'] = location.loc[x, 'Incident_Rate']
             cases_test.loc[y, 'Case_Fatality_Ratio'] = location.loc[x, 'Case_Fatality_Ratio']
-            #to check it's actually running
-            count += 1
             break
 
 cases_train.to_csv('cases_2021_test_processed.csv', encoding='utf-8', index=False)
