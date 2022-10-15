@@ -142,54 +142,40 @@ for y in location.index:
         location.loc[y, 'Country_Region'] = 'United States'
 
 # imputing missing country values with province if it applies
-
 cases_train['country'] = cases_train['country'].fillna(cases_train['province'] + "*")
 cases_test['country'] = cases_test['country'].fillna(cases_test['province'] + "*")
 
-# print(location.info())
-
 # get rid of duplicate data for joining data later
-country = "place holder 1"
+country = "aCountry"
 for x in location.index:
     if location.loc[x, 'Country_Region'] == country:
         location.drop(x, inplace=True)
     else:
         country = location.loc[x, 'Country_Region']
 
-# print(location.info())
-
-
-count = 0
 print("Joining cases_train with Location...")
 for y in cases_train.index:
     for x in location.index:
         if location.loc[x, 'Country_Region'] == cases_train.loc[y, 'country']:
-            # print(count)
             cases_train.loc[y, 'Confirmed'] = location.loc[x, 'Confirmed']
             cases_train.loc[y, 'Deaths'] = location.loc[x, 'Deaths']
             cases_train.loc[y, 'Recovered'] = location.loc[x, 'Recovered']
             cases_train.loc[y, 'Active'] = location.loc[x, 'Active']
             cases_train.loc[y, 'Incident_Rate'] = location.loc[x, 'Incident_Rate']
             cases_train.loc[y, 'Case_Fatality_Ratio'] = location.loc[x, 'Case_Fatality_Ratio']
-            # to check it's actually running
-            count += 1
             break
 print("Done")
 
-count = 0
 print("Joining cases_test with Location...")
 for y in cases_test.index:
     for x in location.index:
         if location.loc[x, 'Country_Region'] == cases_test.loc[y, 'country']:
-            # print(count)
             cases_test.loc[y, 'Confirmed'] = location.loc[x, 'Confirmed']
             cases_test.loc[y, 'Deaths'] = location.loc[x, 'Deaths']
             cases_test.loc[y, 'Recovered'] = location.loc[x, 'Recovered']
             cases_test.loc[y, 'Active'] = location.loc[x, 'Active']
             cases_test.loc[y, 'Incident_Rate'] = location.loc[x, 'Incident_Rate']
             cases_test.loc[y, 'Case_Fatality_Ratio'] = location.loc[x, 'Case_Fatality_Ratio']
-            # to check it's actually running
-            count += 1
             break
 print("Done")
 
